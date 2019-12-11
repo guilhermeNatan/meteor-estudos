@@ -7,11 +7,11 @@ export default   {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: '20%'
+        paddingTop: '7%'
     },
 
     title: {
-       ...defaultStyles.bigTitle,
+       ...defaultStyles.titleSection,
         margin: 30,
         borderWidth: 3,
         borderColor: 'black'

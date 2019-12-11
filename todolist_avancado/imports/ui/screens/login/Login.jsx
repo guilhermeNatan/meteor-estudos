@@ -7,7 +7,7 @@ const Login = props => {
     return (
         <div style={styles.container}>
             <div style={styles.title}>Bem vindo ao todolist</div>
-            <FormLogin/>
+            <FormLogin history={props.history}/>
         </div>
     );
 };
