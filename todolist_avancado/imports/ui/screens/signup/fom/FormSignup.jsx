@@ -39,16 +39,16 @@ class FormSignup extends Component {
             <Card style={styles.container}>
                 <CardHeader title="Cadastro"/>
                 <CardContent>
-                    <form noValidate autoComplete="off">
+                    <form >
                         <div style={styles.formContainer}>
 
-                            <TextField id="standard-error" label="Login"
+                            <TextField id="login" label="Login"
                                        onChange={({target}) => this.setField('username',
                                            target.value)}/>
-                            <TextField id="standard-error" label="Senha" type="password"
+                            <TextField id="senha" label="Senha" type="password"
                                        onChange={({target}) => this.setField('password',
                                            target.value)}/>
-                            <TextField id="standard-error" error={this.validateConfirmPassword()}
+                            <TextField id="confirm" error={this.validateConfirmPassword()}
                                        label="Confirmar senha" type="password"
                                        onChange={({target}) => this.setField('confirmPassword',
                                            target.value)}/>
