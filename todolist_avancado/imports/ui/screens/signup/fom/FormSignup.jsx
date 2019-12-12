@@ -1,39 +1,77 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardContent, CardHeader} from "@material-ui/core";
-import styles from "../../login/components/style";
+import styles from "./style";
 import TextField from "@material-ui/core/TextField";
 import {TDButton} from "../../../reuse/components/TDButton";
-import { Accounts } from 'meteor/accounts-base'
+import routerNames from '/imports/ui/navigation/RauterNames';
+import {Meteor} from 'meteor/meteor';
 
-const FormSignup = ({history}) => {
-    return (
-        <Card style={styles.container}>
-            <CardHeader title="Cadastro"/>
-            <CardContent>
-                <div style={styles.formContainer}>
-                    <TextField id="standard-error" label="Login"/>
-                    <TextField id="standard-error" label="Senha"/>
-                    <TextField id="standard-error" label="Confirmar senha"/>
+class FormSignup extends Component {
 
-                    <div style={styles.footer}>
-                        <TDButton title="Cancelar" type="secondary" styleProps={styles.button}
-                                  onClick={() => history.goBack()}
-                        />
-                        <TDButton title="Confirmar" type="primary" styleProps={styles.button}
-                                  onClick={() =>  Accounts.createUser({username: "capela", password: "123456"}, ()=> console.log("usuario criado"))}
-                        />
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            confirmPassword: ''
+        }
+    }
 
-                        <TDButton title="Foo" type="secondary" styleProps={styles.button}
-                                  onClick={() =>Accounts.findUserByUsername("capela")}
-                        />
+    createUser = () => {
+        const {username, password} = this.state;
+        const {history} = this.props;
+        console.log(username, password);
+        Meteor.call('users.create', username, password, () => history.push(routerNames.HOME));
+    };
 
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
-    );
-};
+    setField = (fieldName, value) => this.setState({[fieldName]: value});
+
+    validateConfirmPassword = () => {
+        const {password, confirmPassword} = this.state;
+        return password !== confirmPassword;
+    }
+
+    render() {
+        const {history} = this.props;
+
+        return (
+            <Card style={styles.container}>
+                <CardHeader title="Cadastro"/>
+                <CardContent>
+                    <form noValidate autoComplete="off">
+                        <div style={styles.formContainer}>
+
+                            <TextField id="standard-error" label="Login"
+                                       onChange={({target}) => this.setField('username',
+                                           target.value)}/>
+                            <TextField id="standard-error" label="Senha" type="password"
+                                       onChange={({target}) => this.setField('password',
+                                           target.value)}/>
+                            <TextField id="standard-error" error={this.validateConfirmPassword()}
+                                       label="Confirmar senha" type="password"
+                                       onChange={({target}) => this.setField('confirmPassword',
+                                           target.value)}/>
+
+                            <div style={styles.footer}>
+                                <TDButton title="Cancelar" type="secondary"
+                                          styleProps={styles.button}
+                                          onClick={() => history.goBack()}
+                                />
+                                <TDButton title="Confirmar" type="primary"
+                                          styleProps={styles.button}
+                                          onClick={this.createUser}
+                                />
+                            </div>
+                        </div>
+                    </form>
+
+                </CardContent>
+            </Card>
+        );
+    }
+}
+
 
 FormSignup.propTypes = {
     history: PropTypes.object.isRequired,

@@ -1,12 +1,21 @@
-import React from 'react';
+import defaultStyles from '../../../reuse/layout/defaultLayout';
 
-const Style = props => {
-    return (
-        <div>
+export default   {
+    ...defaultStyles,
+    container: {
+        width: '50%'
+    },
+    formContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    button: {
+        margin: '0px 15px 0px 15px'
+    },
+    footer: {
+        marginTop: 100
+    },
 
-        </div>
-    );
-};
-
-
-export default Style;
+}

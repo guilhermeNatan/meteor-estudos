@@ -4,6 +4,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import routerNames from '/imports/ui/navigation/RauterNames';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Login } from '../screens/login'
 import { Home } from '../screens/home'
@@ -15,9 +16,9 @@ class Rotas extends Component {
         return (
             <Router history={browserHistory}>
                 <Switch>
-                    <Route exact path="/" component={ Login }/>
-                    <Route exact path="/home" component={ Home }/>
-                    <Route exact path="/signup" component={ Signup }/>
+                    <Route exact path={routerNames.BEGIN} component={ Login }/>
+                    <Route exact path={routerNames.HOME} component={ Home }/>
+                    <Route exact path={routerNames.SIGNUP} component={ Signup }/>
                 </Switch>
             </Router>
         );
