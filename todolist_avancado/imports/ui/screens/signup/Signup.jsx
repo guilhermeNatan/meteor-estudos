@@ -12,6 +12,6 @@ const Signup = props => {
 };
 
 Signup.propTypes = {
-
+    history: PropTypes.object.isRequired
 };
 export default Signup;

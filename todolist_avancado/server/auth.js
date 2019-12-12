@@ -8,4 +8,5 @@ Meteor.methods({
     'users.create'(username, password) {
         return Accounts.createUser({username, password})
     },
+
 })

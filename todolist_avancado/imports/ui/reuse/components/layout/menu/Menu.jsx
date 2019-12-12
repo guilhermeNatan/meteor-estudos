@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Home from '@material-ui/icons/Home';
 import Settings from '@material-ui/icons/Settings';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import MLink from '../mlink/MLink';
 import routerNames from '/imports/ui/navigation/RauterNames';
 import PropTypes from "prop-types";
@@ -34,16 +35,24 @@ class Menu extends Component {
                             <ListItemText primary="Home"/>
                         </ListItem>
                     </MLink>
-                </List>
-                <Divider/>
-                <MLink to={routerNames.HOME}>
-                    <List>
+                    <MLink to={routerNames.HOME}>
                         <ListItem button key="home">
                             <ListItemIcon>{<Settings/>}</ListItemIcon>
                             <ListItemText primary="Tarefas"/>
                         </ListItem>
-                    </List>
-                </MLink>
+                    </MLink>
+                </List>
+                <Divider/>
+
+                <List>
+                    <MLink to={routerNames.BEGIN}>
+                        <ListItem button key="home">
+                            <ListItemIcon>{<ExitToApp/>}</ListItemIcon>
+                            <ListItemText primary="Sair"/>
+                        </ListItem>
+                    </MLink>
+                </List>
+
             </div>
         );
 

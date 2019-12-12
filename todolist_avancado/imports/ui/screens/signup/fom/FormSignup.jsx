@@ -22,7 +22,10 @@ class FormSignup extends Component {
         const {username, password} = this.state;
         const {history} = this.props;
         console.log(username, password);
-        Meteor.call('users.create', username, password, () => history.push(routerNames.HOME));
+        Meteor.call('users.create', username, password, (resp) => {
+            console.log(resp)
+            // history.push(routerNames.HOME)
+        });
     };
 
     setField = (fieldName, value) => this.setState({[fieldName]: value});
