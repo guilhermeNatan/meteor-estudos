@@ -23,10 +23,10 @@ class Menu extends Component {
     };
 
     logout = event => {
-        const { history } = this.props;
+        const {history} = this.props;
         event.preventDefault();
 
-        Meteor.logout(()=> {
+        Meteor.logout(() => {
             history.push(routerNames.BEGIN)
             console.log('logout')
         });
@@ -55,10 +55,10 @@ class Menu extends Component {
                 <Divider/>
 
                 <List>
-                        <ListItem button key="home" onClick={this.logout}>
-                            <ListItemIcon>{<ExitToApp/>}</ListItemIcon>
-                            <ListItemText primary="Sair"/>
-                        </ListItem>
+                    <ListItem button key="home" onClick={this.logout}>
+                        <ListItemIcon>{<ExitToApp/>}</ListItemIcon>
+                        <ListItemText primary="Sair"/>
+                    </ListItem>
                 </List>
 
             </div>
