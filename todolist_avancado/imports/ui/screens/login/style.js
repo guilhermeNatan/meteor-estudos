@@ -4,9 +4,11 @@ export default   {
     ...defaultStyles,
     container: {
         display: 'flex',
+        flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '100%',
         paddingTop: '7%'
     },
 

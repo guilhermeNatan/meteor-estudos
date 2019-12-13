@@ -22,6 +22,16 @@ class Menu extends Component {
         this.setState(state => ({mobileOpen: !state.mobileOpen}));
     };
 
+    logout = event => {
+        const { history } = this.props;
+        event.preventDefault();
+
+        Meteor.logout(()=> {
+            history.push(routerNames.BEGIN)
+            console.log('logout')
+        });
+    };
+
     render() {
         const {classes, theme} = this.props;
         const drawer = (
@@ -45,12 +55,10 @@ class Menu extends Component {
                 <Divider/>
 
                 <List>
-                    <MLink to={routerNames.BEGIN}>
-                        <ListItem button key="home">
+                        <ListItem button key="home" onClick={this.logout}>
                             <ListItemIcon>{<ExitToApp/>}</ListItemIcon>
                             <ListItemText primary="Sair"/>
                         </ListItem>
-                    </MLink>
                 </List>
 
             </div>

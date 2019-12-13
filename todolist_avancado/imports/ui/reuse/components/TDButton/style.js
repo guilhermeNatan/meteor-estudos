@@ -9,8 +9,11 @@ export default   {
     },
     primary: {
         backgroundColor: defaultStyles.colors.primaryColor,
+        color: 'white'
     },
     secudary: {
         backgroundColor: defaultStyles.colors.accentColor,
+        color: 'black'
+
     }
 }

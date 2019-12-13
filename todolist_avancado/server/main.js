@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import Links from '/imports/api/links';
+import { Accounts } from 'meteor/accounts-base'
+import './auth';
 
 function insertLink(title, url) {
   Links.insert({ title, url, createdAt: new Date() });
@@ -29,6 +31,10 @@ Meteor.startup(() => {
     );
   }
 });
+
+
+
+
 
 
 

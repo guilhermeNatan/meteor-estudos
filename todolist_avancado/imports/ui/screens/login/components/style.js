@@ -20,6 +20,10 @@ export default   {
     },
     session: {
         margin: 10
+    },
+    message: {
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: defaultStyles.fonts.regular,
     }
-
 }

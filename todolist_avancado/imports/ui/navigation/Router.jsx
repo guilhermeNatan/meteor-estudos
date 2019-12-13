@@ -14,24 +14,37 @@ import Layout from "../reuse/components/layout/Layout";
 const browserHistory = createBrowserHistory();
 
 const renderizarComLayoutPadrao = Componente => props => (
-    <Layout>
+    <Layout history={props.history}>
         <Componente
             params={props.match.params}
             router={props}
-            history={history}
+            history={props.history}
         />
     </Layout>
 );
 
+export const renderizarComLayoutLogin = Componente => (props) => {
+    const elemento = (<Componente params={props.match.params} {...props} />);
+    return (
+        <div>
+            {
+                elemento
+            }
+        </div>
+    );
+};
 
+const login = renderizarComLayoutLogin(Login)
+const home = renderizarComLayoutPadrao(Home)
+const signup = renderizarComLayoutLogin(Signup)
 class Rotas extends Component {
     render() {
         return (
             <Router history={browserHistory}>
                 <Switch>
-                    <Route exact path={routerNames.BEGIN} component={ Login }/>
-                    <Route exact path={routerNames.SIGNUP} component={ Signup }/>
-                    <Route exact path={routerNames.HOME} component={ renderizarComLayoutPadrao(Home) }/>
+                    <Route exact path={routerNames.BEGIN} component={ login }/>
+                    <Route exact path={routerNames.SIGNUP} component={ signup }/>
+                    <Route exact path={routerNames.HOME} component={home  }/>
                 </Switch>
             </Router>
         );

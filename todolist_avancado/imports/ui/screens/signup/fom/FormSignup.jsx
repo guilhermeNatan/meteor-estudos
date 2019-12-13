@@ -21,11 +21,8 @@ class FormSignup extends Component {
     createUser = () => {
         const {username, password} = this.state;
         const {history} = this.props;
-        console.log(username, password);
-        Meteor.call('users.create', username, password, (resp) => {
-            console.log(resp)
-            // history.push(routerNames.HOME)
-        });
+        // users.criateUser(username,password);
+        Meteor.call('users.create', username, password,(err, respo)=> console.log('criado', err, respo));
     };
 
     setField = (fieldName, value) => this.setState({[fieldName]: value});
@@ -40,7 +37,7 @@ class FormSignup extends Component {
 
         return (
             <Card style={styles.container}>
-                <CardHeader title="Cadastro"/>
+                <CardHeader title="Cadastro" style={{textAlign: 'center'}}/>
                 <CardContent>
                     <form >
                         <div style={styles.formContainer}>

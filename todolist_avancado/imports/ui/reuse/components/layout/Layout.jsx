@@ -8,14 +8,15 @@ import styles from './style';
 
 class Layout extends React.Component {
     render() {
-        const { classes, theme, children } = this.props;
+        const { classes, theme, children, history } = this.props;
+
 
 
         return (
             <div className={classes.root}>
                 <CssBaseline />
                 <Header classes={classes} theme={theme} />
-                <Menu classes={classes} theme={theme} />
+                <Menu classes={classes} theme={theme} history={history} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     {children}

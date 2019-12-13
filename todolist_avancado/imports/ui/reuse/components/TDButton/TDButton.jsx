@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const TDButton = ({ title, type,  styleProps, ...props}) => {
     return (
-        <Button variant="contained" style={{...styles.container, ...styles[type], ...styleProps }} {...props}>
+        <Button variant="contained"  style={{...styles.container, ...styles[type], ...styleProps }} {...props}>
             {title}
         </Button>
     );

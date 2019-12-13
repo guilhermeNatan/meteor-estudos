@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import styles from './style';
 import {TDButton} from "../../../reuse/components/TDButton";
-import {Card, CardContent} from "@material-ui/core";
+import {Card, CardContent, CardHeader} from "@material-ui/core";
 import PropTypes from 'prop-types';
-import {Meteor} from 'meteor/meteor';
 import {
     Link
 } from "react-router-dom";
@@ -18,30 +17,46 @@ class FormLogin extends Component {
         this.state = {
             username: '',
             password: '',
+            message: ''
         }
     }
 
 
-    login = () => {
+    login = (event) => {
+        event.preventDefault();
         const { username, password } = this.state;
         const { history } = this.props;
-        Meteor.loginWithPassword(username, password, (resp) =>   {
-            console.log(resp)
-            // history.push(routerNames.HOME)
+        console.log(username, password)
+        Meteor.loginWithPassword(username, password, (error) =>   {
+           if(Meteor.user()){
+               history.push(routerNames.HOME)
+           }else {
+             this.setState({ message: 'Usuário inválido'})
+           }
+
         })
-    }
+    };
+
+    setField = (fieldName, value) => this.setState({[fieldName]: value});
 
     render() {
-
+        const { message } = this.state;
         return (
             <Card style={styles.container}>
                 <CardContent>
                     <div style={styles.formContainer}>
-                        <TextField id="standard-error" label="Login"/>
-                        <TextField id="standard-error" type="password" label="Senha"/>
+                        <CardHeader title="Bem vindo ao TODO LIST" style={{textAlign: 'center'}}/>
+                        <TextField id="standard-error" label="Login"
+                                   onChange={({target}) => this.setField('username', target.value)} />
+                        <TextField id="standard-error" type="password" label="Senha"
+                                   onChange={({target}) => this.setField('password', target.value)} />
                         <TDButton title="Entrar" type="primary" styleProps={styles.button}
                                   onClick={this.login}
                         />
+
+                        <div style={styles.message} >
+                            {message }
+                        </div>
 
                         <div style={styles.footer}>
                             <Link style={styles.session}>
@@ -52,6 +67,7 @@ class FormLogin extends Component {
                             </Link>
                         </div>
                     </div>
+
                 </CardContent>
             </Card>
         );
