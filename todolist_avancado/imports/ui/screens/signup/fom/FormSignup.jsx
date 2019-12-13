@@ -12,17 +12,22 @@ class FormSignup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
-            confirmPassword: ''
+            username: null,
+            password: null,
+            confirmPassword: null,
+            message: null
         }
     }
 
     createUser = () => {
         const {username, password} = this.state;
         const {history} = this.props;
-        // users.criateUser(username,password);
-        Meteor.call('users.create', username, password,(err, respo)=> console.log('criado', err, respo));
+        Meteor.call('users.create', username, password, (err) => {
+            if (err) {
+                this.setState({message: `Não foi possivel criar seu ususario: ${err.message}`})
+            }
+            return history.push(routerNames.HOME)
+        });
     };
 
     setField = (fieldName, value) => this.setState({[fieldName]: value});
@@ -30,7 +35,13 @@ class FormSignup extends Component {
     validateConfirmPassword = () => {
         const {password, confirmPassword} = this.state;
         return password !== confirmPassword;
-    }
+    };
+    camposInformados = () => {
+        const {username, password, confirmPassword} = this.state;
+        return username && password && confirmPassword;
+    };
+
+    enableConfirm = () => !this.validateConfirmPassword() && this.camposInformados();
 
     render() {
         const {history} = this.props;
@@ -39,9 +50,8 @@ class FormSignup extends Component {
             <Card style={styles.container}>
                 <CardHeader title="Cadastro" style={{textAlign: 'center'}}/>
                 <CardContent>
-                    <form >
+                    <form>
                         <div style={styles.formContainer}>
-
                             <TextField id="login" label="Login"
                                        onChange={({target}) => this.setField('username',
                                            target.value)}/>
@@ -54,13 +64,16 @@ class FormSignup extends Component {
                                            target.value)}/>
 
                             <div style={styles.footer}>
-                                <TDButton title="Cancelar" type="secondary"
+                                <TDButton title="Cancelar"
+                                          type="secundary"
                                           styleProps={styles.button}
                                           onClick={() => history.goBack()}
                                 />
-                                <TDButton title="Confirmar" type="primary"
+                                <TDButton title="Confirmar"
+                                          type="primary"
                                           styleProps={styles.button}
                                           onClick={this.createUser}
+                                          disabled={!this.enableConfirm()}
                                 />
                             </div>
                         </div>

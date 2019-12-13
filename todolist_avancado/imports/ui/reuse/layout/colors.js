@@ -7,4 +7,5 @@ export default {
     primaryTextColor: "#212121",
     secondaryTextColor: "#757575",
     dividerColor: "#BDBDBD",
+    disabled: "#E0E0E0",
 }

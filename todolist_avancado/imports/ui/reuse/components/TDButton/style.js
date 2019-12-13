@@ -9,11 +9,14 @@ export default   {
     },
     primary: {
         backgroundColor: defaultStyles.colors.primaryColor,
-        color: 'white'
+        color: 'white',
     },
-    secudary: {
-        backgroundColor: defaultStyles.colors.accentColor,
+    secundary: {
+        backgroundColor: defaultStyles.colors.disabled,
         color: 'black'
-
+    },
+    disabled: {
+        backgroundColor: defaultStyles.colors.primaryColorLight,
+        color: 'white',
     }
 }
