@@ -11,7 +11,7 @@ export default {
         color: colors.primaryTextColor,
     },
     subTitle: {
-        fontSize: fonts.big,
+        fontSize: fonts.regular,
         color: colors.secondaryTextColor,
     },
     colors,

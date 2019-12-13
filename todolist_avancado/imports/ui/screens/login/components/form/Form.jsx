@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import styles from './style';
-import {TDButton} from "../../../reuse/components/TDButton";
+import {TDButton} from "../../../../reuse/components/TDButton";
 import {Card, CardContent, CardHeader} from "@material-ui/core";
 import PropTypes from 'prop-types';
 import {
