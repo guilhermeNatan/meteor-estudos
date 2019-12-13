@@ -45,7 +45,7 @@ class Menu extends Component {
                             <ListItemText primary="Home"/>
                         </ListItem>
                     </MLink>
-                    <MLink to={routerNames.HOME}>
+                    <MLink to={routerNames.TASKS}>
                         <ListItem button key="home">
                             <ListItemIcon>{<Settings/>}</ListItemIcon>
                             <ListItemText primary="Tarefas"/>

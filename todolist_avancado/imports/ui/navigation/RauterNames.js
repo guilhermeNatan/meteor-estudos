@@ -1,5 +1,6 @@
 export default  {
     BEGIN: '/',
     HOME: '/home',
-    SIGNUP: '/signup'
+    SIGNUP: '/signup',
+    TASKS: '/tasks'
 }

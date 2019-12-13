@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './style';
 import Tile from "./components/tile/Tile";
 import Mlink from "../../reuse/components/layout/mlink/MLink";
+import routerNames from '/imports/ui/navigation/RauterNames';
 
 const Home = props => {
     return (
@@ -13,8 +14,7 @@ const Home = props => {
             <div style={styles.session}>
                 <Tile text={"Total de tarefas cadastradas"} metric={20}/>
 
-
-                <Mlink to={"/home"}>
+                <Mlink to={routerNames.TASKS}>
                    <Tile text={"+ Ver minhas tarefas"} />
                 </Mlink>
             </div>

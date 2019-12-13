@@ -9,6 +9,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { Login } from '../screens/login'
 import { Home } from '../screens/home'
 import { Signup } from '../screens/signup'
+import { Tasks } from '../screens/tasks'
 import Layout from "../reuse/components/layout/Layout";
 
 const browserHistory = createBrowserHistory();
@@ -34,9 +35,11 @@ export const renderizarComLayoutLogin = Componente => (props) => {
     );
 };
 
-const login = renderizarComLayoutLogin(Login)
-const home = renderizarComLayoutPadrao(Home)
-const signup = renderizarComLayoutLogin(Signup)
+const login = renderizarComLayoutLogin(Login);
+const signup = renderizarComLayoutLogin(Signup);
+const home = renderizarComLayoutPadrao(Home);
+const tasks =  renderizarComLayoutPadrao(Tasks);
+
 class Rotas extends Component {
     render() {
         return (
@@ -44,7 +47,8 @@ class Rotas extends Component {
                 <Switch>
                     <Route exact path={routerNames.BEGIN} component={ login }/>
                     <Route exact path={routerNames.SIGNUP} component={ signup }/>
-                    <Route exact path={routerNames.HOME} component={home  }/>
+                    <Route exact path={routerNames.HOME} component={ home }/>
+                    <Route exact path={routerNames.TASKS} component={ tasks  }/>
                 </Switch>
             </Router>
         );
