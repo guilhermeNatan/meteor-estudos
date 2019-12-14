@@ -23,7 +23,7 @@ class TaskListItem extends Component {
     };
     editTask = () => {
         const { history, task } = this.props;
-        history.push(`${routerNames.EDIT_TASK}/editar/${task._id}`)
+        history.push(routerNames.EDIT_TASK.editar(task._id))
     };
     render() {
         const { task } = this.props;

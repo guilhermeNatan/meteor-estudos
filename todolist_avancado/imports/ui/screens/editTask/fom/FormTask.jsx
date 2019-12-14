@@ -41,8 +41,8 @@ class FormTask extends Component {
     };
 
     saveTask = () => {
-        const {history} = this.props;
-        FormTaskModlLogic.saveTask(this.state, (err) => {
+        const {history, params: idTask} = this.props;
+        FormTaskModlLogic.saveTask(this.state, idTask, (err) => {
             if (err) {
                 this.setState({message: `Não foi cadastrar a tarefa: ${err.message}`})
             }
@@ -50,8 +50,11 @@ class FormTask extends Component {
         })
     };
 
+
+
     render() {
-        const {history} = this.props;
+        const {history , taskForEdit} = this.props;
+
         const {data, hora} = this.state;
         return (
             <Grid item xs={12} md={12}>
@@ -63,11 +66,13 @@ class FormTask extends Component {
                                 <TextField id="nome"
                                            style={styles.textField}
                                            label="Dê um nome bonito para sua tarefa"
+                                           defaultValue={taskForEdit ? taskForEdit.nome: ''}
                                            onChange={({target}) => this.setField('nome',
                                                target.value)}/>
                                 <TextField id="descricao"
                                            style={styles.textField}
                                            label="Descreva sua tarefa aqui"
+                                           defaultValue={taskForEdit ? taskForEdit.descricao: ''}
                                            onChange={({target}) =>
                                                this.setField('descricao',
                                                    target.value)}/>
@@ -80,7 +85,7 @@ class FormTask extends Component {
                                             id="date-picker-dialog"
                                             label="Data"
                                             format="dd/MM/yyyy"
-                                            value={data}
+                                            value={taskForEdit ? taskForEdit.dataExecucao: data}
                                             onChange={(date) =>
                                                 this.setField("data", date)}
                                             KeyboardButtonProps={{
@@ -91,7 +96,7 @@ class FormTask extends Component {
                                             margin="normal"
                                             id="time-picker"
                                             label="Hora"
-                                            value={hora}
+                                            value={taskForEdit ? taskForEdit.dataExecucao: hora}
                                             onChange={(time) =>
                                                 this.setField("hora", time)}
                                             KeyboardButtonProps={{
@@ -128,5 +133,6 @@ class FormTask extends Component {
 
 FormTask.propTypes = {
     history: PropTypes.object.isRequired,
+    taskForEdit: PropTypes.object,
 };
 export default FormTask;

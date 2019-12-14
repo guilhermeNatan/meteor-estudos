@@ -3,6 +3,10 @@ export default  {
     HOME: '/home',
     SIGNUP: '/signup',
     TASKS: '/tasks',
-    EDIT_TASK: '/editTask',
+    EDIT_TASK : {
+        router: `/editTask/:operacao(criar|editar)/:idTask?`,
+        editar: (id) => `/editTask/editar/${id}`,
+        criar: () => `/editTask/criar`
+    }
 
 }
