@@ -10,16 +10,21 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import {Meteor} from 'meteor/meteor';
+import routerNames from '/imports/ui/navigation/RauterNames';
 
 class TaskListItem extends Component {
     deleteTask = () => {
         const { task } = this.props;
         Meteor.call('tasks.remove', task._id, (err) => {
             if (err) {
-                this.setState({message: `Nãoo foi possivel criar seu ususario: ${err.message}`})
+                this.setState({message: `Não foi possivel criar seu ususario: ${err.message}`})
             }
         });
-    }
+    };
+    editTask = () => {
+        const { history, task } = this.props;
+        history.push(`${routerNames.EDIT_TASK}/editar/${task._id}`)
+    };
     render() {
         const { task } = this.props;
         return (
@@ -35,7 +40,7 @@ class TaskListItem extends Component {
                     <IconButton  onClick={this.deleteTask}>
                         <DeleteIcon/>
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={this.editTask}>
                         <EditIcon/>
                     </IconButton>
                 </ListItemSecondaryAction>
@@ -46,6 +51,7 @@ class TaskListItem extends Component {
 
 TaskListItem.propTypes = {
     task: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 export default TaskListItem;

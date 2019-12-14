@@ -52,8 +52,7 @@ class Rotas extends Component {
                     <Route exact path={routerNames.SIGNUP} component={signup}/>
                     <Route exact path={routerNames.HOME} component={home}/>
                     <Route exact path={routerNames.TASKS} component={tasks}/>
-                    <Route exact path={routerNames.EDIT_TASK} component={editTask}/>
-                    <Route exact path={routerNames.CREATE_TASK} component={editTask}/>
+                    <Route exact path={`${routerNames.EDIT_TASK}/:operacao(criar|editar)/:idTask?`} component={editTask}/>
                 </Switch>
             </Router>
         );

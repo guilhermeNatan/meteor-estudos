@@ -21,7 +21,7 @@ class Header extends Component {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h5" color="inherit" component="p" noWrap>
-                        {'Todo List Avançado'}
+                        {'Bem vindo ao Todo List Avançado'}
                     </Typography>
                 </Toolbar>
             </AppBar>

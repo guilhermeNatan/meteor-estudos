@@ -7,17 +7,17 @@ import PropTypes from 'prop-types';
 
 class TaskList extends Component {
     renderTasks = () => {
-        const { tasks, currentUser } = this.props;
+        const {tasks, history} = this.props;
         return tasks.map((task) => {
-            const currentUserId = currentUser && currentUser._id;
-            const showPrivateButton = task.owner === currentUserId;
             return (
                 <TaskListItem key={task._id}
-                      task={task}
-                      showPrivateButton={showPrivateButton} />
+                              task={task}
+                              history={history}
+                />
             )
         });
     }
+
     render() {
         return (
             <Grid item xs={12} md={12}>

@@ -20,7 +20,7 @@ class TasksScreen extends Component {
                 <Fab color="primary"
                      className={classes.fab}
                      aria-label="add"
-                     onClick={()=> history.push(routerNames.CREATE_TASK)}>
+                     onClick={()=> history.push(`${routerNames.EDIT_TASK}/criar`)}>
                     <AddIcon />
                 </Fab>
             </div>
