@@ -6,10 +6,12 @@ import {
 } from "react-router-dom";
 import routerNames from '/imports/ui/navigation/RauterNames';
 import createBrowserHistory from 'history/createBrowserHistory';
-import { Login } from '../screens/login'
-import { Home } from '../screens/home'
-import { Signup } from '../screens/signup'
-import { Tasks } from '../screens/tasks'
+import {Login} from '../screens/login';
+import {Home} from '../screens/home';
+import {Signup} from '../screens/signup';
+import {Tasks} from '../screens/tasks';
+import {EditTask} from '../screens/editTask';
+
 import Layout from "../reuse/components/layout/Layout";
 
 const browserHistory = createBrowserHistory();
@@ -38,17 +40,20 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 const login = renderizarComLayoutLogin(Login);
 const signup = renderizarComLayoutLogin(Signup);
 const home = renderizarComLayoutPadrao(Home);
-const tasks =  renderizarComLayoutPadrao(Tasks);
+const tasks = renderizarComLayoutPadrao(Tasks);
+const editTask = renderizarComLayoutPadrao(EditTask);
 
 class Rotas extends Component {
     render() {
         return (
             <Router history={browserHistory}>
                 <Switch>
-                    <Route exact path={routerNames.BEGIN} component={ login }/>
-                    <Route exact path={routerNames.SIGNUP} component={ signup }/>
-                    <Route exact path={routerNames.HOME} component={ home }/>
-                    <Route exact path={routerNames.TASKS} component={ tasks  }/>
+                    <Route exact path={routerNames.BEGIN} component={login}/>
+                    <Route exact path={routerNames.SIGNUP} component={signup}/>
+                    <Route exact path={routerNames.HOME} component={home}/>
+                    <Route exact path={routerNames.TASKS} component={tasks}/>
+                    <Route exact path={routerNames.EDIT_TASK} component={editTask}/>
+                    <Route exact path={routerNames.CREATE_TASK} component={editTask}/>
                 </Switch>
             </Router>
         );

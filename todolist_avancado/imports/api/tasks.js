@@ -19,14 +19,18 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'tasks.insert'(text){
-        check(text, String);
+    'tasks.insert'(nome, descricao, data){
+        check(nome, String);
+        check(descricao, String);
+
         if(!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
         Tasks.insert({
-            text,
+            nome,
+            descricao,
+            dataExecucao: data,
             createdAt: new Date(),
             owner: this.userId,
             username: Meteor.users.findOne(this.userId).username,

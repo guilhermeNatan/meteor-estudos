@@ -1,29 +1,38 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styles from './style';
-import { ListItem } from '@material-ui/core';
+import React, {Component} from 'react';
+import {ListItem} from '@material-ui/core';
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import PropTypes from 'prop-types';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import {Meteor} from 'meteor/meteor';
 
 class TaskListItem extends Component {
+    deleteTask = () => {
+        const { task } = this.props;
+        Meteor.call('tasks.remove', task._id, (err) => {
+            if (err) {
+                this.setState({message: `Nãoo foi possivel criar seu ususario: ${err.message}`})
+            }
+        });
+    }
     render() {
-
+        const { task } = this.props;
         return (
-            <ListItem  ContainerComponent="div">
+            <ListItem ContainerComponent="div">
                 <ListItemAvatar>
                     <Avatar>
-                        <SettingsIcon />
+                        <SettingsIcon/>
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Single-line item"/>
+                <ListItemText primary={ `${task.descricao}`}
+                              secondary={`${task.username} : : ${new Date(task.dataExecucao).toLocaleString()}`}  />
                 <ListItemSecondaryAction>
-                    <IconButton>
+                    <IconButton  onClick={this.deleteTask}>
                         <DeleteIcon/>
                     </IconButton>
                     <IconButton>
@@ -36,7 +45,7 @@ class TaskListItem extends Component {
 }
 
 TaskListItem.propTypes = {
-
+    task: PropTypes.object.isRequired,
 };
 
 export default TaskListItem;

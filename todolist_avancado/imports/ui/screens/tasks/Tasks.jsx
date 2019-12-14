@@ -7,17 +7,20 @@ import { Tasks } from '/imports/api/tasks';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core';
-
+import routerNames from '/imports/ui/navigation/RauterNames';
 
 
 class TasksScreen extends Component {
     render() {
-        const { tasks,  classes } = this.props;
+        const { tasks,  classes, history } = this.props;
         console.log(tasks)
         return (
             <div style={styles.container}>
-                <TaskList tasks={tasks} />
-                <Fab color="primary"  className={classes.fab} aria-label="add">
+                <TaskList tasks={tasks} history={history} />
+                <Fab color="primary"
+                     className={classes.fab}
+                     aria-label="add"
+                     onClick={()=> history.push(routerNames.CREATE_TASK)}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -26,7 +29,9 @@ class TasksScreen extends Component {
 }
 
 TasksScreen.propTypes = {
-
+    tasks: PropTypes.array,
+    classes: PropTypes.object,
+    history: PropTypes.object,
 };
 
 
