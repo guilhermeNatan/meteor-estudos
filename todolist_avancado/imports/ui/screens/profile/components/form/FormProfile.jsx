@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import SelectGender from "../selectsex/SelectGender";
+import FileUpload from "../../../../reuse/components/fileupload/FileUpload";
+import CardMedia from '@material-ui/core/CardMedia';
 
 class FormProfile extends Component {
 
@@ -21,7 +23,8 @@ class FormProfile extends Component {
             email: userProfile ? userProfile.email : null,
             empresa: userProfile ? userProfile.empresa : null,
             dataNascimento: userProfile ? userProfile.dataNascimento : new Date(),
-            genero: userProfile ? userProfile.genero : null
+            genero: userProfile ? userProfile.genero : null,
+            photo: userProfile ? userProfile.photo : null,
         }
     }
 
@@ -33,10 +36,6 @@ class FormProfile extends Component {
         return password !== confirmPassword;
     };
 
-    camposInformados = () => {
-        const {nome, email, empresa, dataNascimento} = this.state;
-        return true;
-    };
 
     save = () => {
         Meteor.call('user.updateProfile', this.state, (err) => {
@@ -45,19 +44,42 @@ class FormProfile extends Component {
                 message = `Não foi possível atualizar seu perfil: ${err.message}`
             }
             console.log(err)
-            this.setState({ message, isEditing: false})
+            this.setState({message, isEditing: false})
         })
+    };
+
+    uploadPhoto = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            Meteor.call('user.updatePhoto',event.target.result, () => {
+                    this.setField('photo', event.target.result)
+                }
+            );
+        }
+        reader.readAsDataURL(file);
     };
 
 
     render() {
-        const {history, userProfile} = this.props;
-        const {message, isEditing, dataNascimento, nome, email, empresa, genero} = this.state;
-
+        const {message, isEditing, dataNascimento, nome, email, empresa, genero, photo} = this.state;
         return (
             <Grid item xs={12} md={12}>
                 <Card style={styles.container}>
                     <CardHeader title="Perfil de usuário" style={{textAlign: 'center'}}/>
+                    {/*<img src={data} alt="Red dot" />*/}
+                    {
+                        photo &&
+                        <CardMedia
+                            image={photo}
+                            component="img"
+                            style={{
+                                height: '200px'
+                            }}
+                            title="Foto de perfil"
+                        />
+                    }
                     <CardContent>
                         <div style={styles.formContainer}>
 
@@ -91,13 +113,11 @@ class FormProfile extends Component {
                             <div style={styles.dateTime}>
                                 <SelectGender
                                     handleChange={({target}) =>
-                                    this.setField('genero',
-                                        target.value)}
+                                        this.setField('genero',
+                                            target.value)}
                                     defaultValue={genero}
                                     disabled={!isEditing}
                                 />
-
-
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
                                         margin="normal"
@@ -115,12 +135,9 @@ class FormProfile extends Component {
                                 </MuiPickersUtilsProvider>
 
                             </div>
-
                             <div>
                                 {message}
                             </div>
-
-
                             <div style={styles.footer}>
                                 {
                                     isEditing &&
@@ -128,24 +145,33 @@ class FormProfile extends Component {
                                         <TDButton title="Cancelar"
                                                   type="secundary"
                                                   styleProps={styles.button}
-                                                  onClick={()=> this.setState({isEditing: false})}
+                                                  onClick={() => this.setState({isEditing: false})}
                                         />
                                         <TDButton title="Salvar"
                                                   type="primary"
                                                   styleProps={styles.button}
                                                   onClick={this.save}
-                                                  disabled={!this.camposInformados()}
                                         />
                                     </>
                                 }
                                 {
                                     !isEditing &&
+                                    (
+                                        <>
+                                            <FileUpload
+                                                title="Enviar foto"
+                                                inputProps={{
+                                                    onChange: (event) => this.uploadPhoto(event)
+                                                }}
+                                            />
 
-                                    <TDButton title="Atualizar"
-                                              type="primary"
-                                              styleProps={styles.button}
-                                              onClick={()=> this.setState({isEditing: true})}
-                                    />
+                                            <TDButton title="Atualizar"
+                                                      type="primary"
+                                                      styleProps={styles.button}
+                                                      onClick={() => this.setState({isEditing: true})}
+                                            />
+                                        </>
+                                    )
                                 }
 
 

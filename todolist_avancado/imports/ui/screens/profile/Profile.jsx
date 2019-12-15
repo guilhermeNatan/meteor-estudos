@@ -3,7 +3,6 @@ import FormProfile from "./components/form/FormProfile";
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 
-
 class Profile extends Component {
 
 
@@ -11,6 +10,7 @@ class Profile extends Component {
         const { history, userProfile } = this.props;
         return (
             <div>
+
                 <FormProfile
                     history={history}
                     userProfile={userProfile}

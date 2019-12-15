@@ -9,7 +9,8 @@ Meteor.methods({
         if(!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        Meteor.users.update(this.userId, {$set: { profile: { nome, email, empresa, dataNascimento, genero  }}})
+        Meteor.users.update(this.userId, {$set: { profile:
+                    { nome, email, empresa, dataNascimento, genero  }}})
     },
 
     'user.getProfile'() {
@@ -17,6 +18,13 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         return  Meteor.users.findOne(this.userId)
+    },
+
+    'user.updatePhoto'( photo ) {
+        if(!this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        Meteor.users.update(this.userId, {$set:  {"profile.photo": photo } })
     }
 
 })
