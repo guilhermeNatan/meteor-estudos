@@ -1,4 +1,4 @@
-import defaultStyles from '../../../reuse/layout/defaultLayout';
+import defaultStyles from '/imports/ui/reuse/layout/defaultLayout';
 
 export default   {
     ...defaultStyles,

@@ -11,6 +11,8 @@ import {Home} from '../screens/home';
 import {Signup} from '../screens/signup';
 import {Tasks} from '../screens/tasks';
 import {EditTask} from '../screens/editTask';
+import {Profile} from '../screens/profile';
+
 
 import Layout from "../reuse/components/layout/Layout";
 
@@ -42,6 +44,8 @@ const signup = renderizarComLayoutLogin(Signup);
 const home = renderizarComLayoutPadrao(Home);
 const tasks = renderizarComLayoutPadrao(Tasks);
 const editTask = renderizarComLayoutPadrao(EditTask);
+const profile = renderizarComLayoutPadrao(Profile);
+
 
 class Rotas extends Component {
     render() {
@@ -53,6 +57,8 @@ class Rotas extends Component {
                     <Route exact path={routerNames.HOME} component={home}/>
                     <Route exact path={routerNames.TASKS} component={tasks}/>
                     <Route exact path={routerNames.EDIT_TASK.router} component={editTask}/>
+                    <Route exact path={routerNames.PROFILE} component={profile}/>
+
                 </Switch>
             </Router>
         );

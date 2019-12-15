@@ -3,27 +3,25 @@ import PropTypes from 'prop-types';
 import {Card, CardContent, CardHeader} from "@material-ui/core";
 import styles from "./style";
 import TextField from "@material-ui/core/TextField";
-import {TDButton} from "../../../reuse/components/TDButton";
+import {TDButton} from "/imports/ui/reuse/components/TDButton";
 import Grid from '@material-ui/core/Grid';
-import {
-    KeyboardDatePicker,
-    KeyboardTimePicker,
-    MuiPickersUtilsProvider
-} from '@material-ui/pickers';
+import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import routerNames from "../../../navigation/RauterNames";
-import FormTaskLogicModel from "./FormTaskLogicModel";
+import routerNames from "/imports/ui/navigation/RauterNames";
+import FormProfileLogicModel from "./FormProfileLogicModel";
+import SelectGender from "../selectsex/SelectGender";
 
-class FormTask extends Component {
+class FormProfile extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            message: null,
             nome: null,
-            descricao: null,
-            data: new Date(),
-            hora: new Date(),
-            message: null
+            email: null,
+            empresa: null,
+            dataNascimento: null,
+            genero: null
         }
     }
 
@@ -36,13 +34,13 @@ class FormTask extends Component {
     };
 
     camposInformados = () => {
-        const {nome, descricao} = this.state;
-        return nome && descricao;
+        const {nome, email, empresa, dataNascimento} = this.state;
+        return true;
     };
 
     saveTask = () => {
         const {history, params: idTask} = this.props;
-        FormTaskLogicModel.saveTask(this.state, idTask, (err) => {
+        FormProfileLogicModel.saveTask(this.state, idTask, (err) => {
             if (err) {
                 this.setState({message: `Não foi cadastrar a tarefa: ${err.message}`})
             }
@@ -51,60 +49,62 @@ class FormTask extends Component {
     };
 
 
-
     render() {
-        const {history , taskForEdit} = this.props;
+        const {history, taskForEdit} = this.props;
 
         const {data, hora} = this.state;
         return (
             <Grid item xs={12} md={12}>
                 <Card style={styles.container}>
-                    <CardHeader title="Cadastre uma tarefa" style={{textAlign: 'center'}}/>
+                    <CardHeader title="Perfil de usuário" style={{textAlign: 'center'}}/>
                     <CardContent>
-                        <form>
                             <div style={styles.formContainer}>
+
                                 <TextField id="nome"
                                            style={styles.textField}
-                                           label="Dê um nome bonito para sua tarefa"
-                                           defaultValue={taskForEdit ? taskForEdit.nome: ''}
+                                           label="Nome"
                                            onChange={({target}) => this.setField('nome',
                                                target.value)}/>
-                                <TextField id="descricao"
+                                <TextField id="email"
                                            style={styles.textField}
-                                           label="Descreva sua tarefa aqui"
-                                           defaultValue={taskForEdit ? taskForEdit.descricao: ''}
+                                           label="Email"
+                                           type="email"
                                            onChange={({target}) =>
-                                               this.setField('descricao',
+                                               this.setField('email',
+                                                   target.value)}/>
+                                <TextField id="empresa"
+                                           style={styles.textField}
+                                           label="Empresa"
+                                           onChange={({target}) =>
+                                               this.setField('empresa',
                                                    target.value)}/>
 
 
+
                                 <div style={styles.dateTime}>
+                                    <SelectGender handleChange={({target}) =>
+                                        this.setField('genero',
+                                            target.value)} />
+
+
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                         <KeyboardDatePicker
                                             margin="normal"
                                             id="date-picker-dialog"
-                                            label="Data"
+                                            label="Data de nascimento"
                                             format="dd/MM/yyyy"
-                                            value={taskForEdit ? taskForEdit.dataExecucao: data}
+                                            value={taskForEdit ? taskForEdit.dataExecucao : data}
                                             onChange={(date) =>
-                                                this.setField("data", date)}
+                                                this.setField("dataNascimento", date)}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change date',
                                             }}
                                         />
-                                        <KeyboardTimePicker
-                                            margin="normal"
-                                            id="time-picker"
-                                            label="Hora"
-                                            value={taskForEdit ? taskForEdit.dataExecucao: hora}
-                                            onChange={(time) =>
-                                                this.setField("hora", time)}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change time',
-                                            }}
-                                        />
                                     </MuiPickersUtilsProvider>
+
                                 </div>
+
+
 
 
                                 <div style={styles.footer}>
@@ -119,10 +119,10 @@ class FormTask extends Component {
                                               onClick={this.saveTask}
                                               disabled={!this.camposInformados()}
                                     />
+
+
                                 </div>
                             </div>
-                        </form>
-
                     </CardContent>
                 </Card>
             </Grid>
@@ -131,8 +131,8 @@ class FormTask extends Component {
 }
 
 
-FormTask.propTypes = {
+FormProfile.propTypes = {
     history: PropTypes.object.isRequired,
     taskForEdit: PropTypes.object,
 };
-export default FormTask;
+export default FormProfile;

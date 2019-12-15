@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Home from '@material-ui/icons/Home';
 import Settings from '@material-ui/icons/Settings';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import MLink from '../mlink/MLink';
 import routerNames from '/imports/ui/navigation/RauterNames';
@@ -49,6 +50,12 @@ class Menu extends Component {
                         <ListItem button key="home">
                             <ListItemIcon>{<Settings/>}</ListItemIcon>
                             <ListItemText primary="Tarefas"/>
+                        </ListItem>
+                    </MLink>
+                    <MLink to={routerNames.PROFILE}>
+                        <ListItem button key="profile">
+                            <ListItemIcon>{<AccountCircle/>}</ListItemIcon>
+                            <ListItemText primary="Perfil"/>
                         </ListItem>
                     </MLink>
                 </List>

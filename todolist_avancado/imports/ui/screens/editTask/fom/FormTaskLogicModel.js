@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 
-export default  class FormTaskModlLogic {
+export default  class FormTaskLogicModel {
 
    static  saveTask = ({ nome, descricao, data, hora }, id,  callBack) => {
         const dataTarefa = new Date(data);
