@@ -26,7 +26,6 @@ class FormLogin extends Component {
         event.preventDefault();
         const { username, password } = this.state;
         const { history } = this.props;
-        console.log(username, password)
         Meteor.loginWithPassword(username, password, (error) =>   {
            if(Meteor.user()){
                history.push(routerNames.HOME)

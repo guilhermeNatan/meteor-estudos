@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import styles from './style';
 
-const SelectGender = ({handleChange}) => {
+const SelectGender = ({handleChange, ...props}) => {
     return (
             <>
                 <InputLabel id="demo-simple-select-helper-label">Gênero</InputLabel>
@@ -13,6 +13,7 @@ const SelectGender = ({handleChange}) => {
                     labelId="demo-simple-select-required-label"
                     id="demo-simple-select-required"
                     onChange={handleChange}
+                    { ...props}
                 >
                     <MenuItem value={'M'}>Masculino</MenuItem>
                     <MenuItem value={'F'}>Feminino</MenuItem>

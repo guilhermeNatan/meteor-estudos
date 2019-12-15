@@ -11,7 +11,6 @@ class EditTask extends Component {
 
     render() {
         const { history, task } = this.props;
-        console.log('task', this.props)
         return (
             <div style={styles.container}>
                <FormTask

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import Links from '/imports/api/links';
-import { Accounts } from 'meteor/accounts-base'
 import '../imports/api/tasks.js';
+import '../imports/api/user.js';
 
 import './auth';
 

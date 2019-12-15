@@ -13,7 +13,6 @@ import routerNames from '/imports/ui/navigation/RauterNames';
 class TasksScreen extends Component {
     render() {
         const { tasks,  classes, history } = this.props;
-        console.log(tasks)
         return (
             <div style={styles.container}>
                 <TaskList tasks={tasks} history={history} />
