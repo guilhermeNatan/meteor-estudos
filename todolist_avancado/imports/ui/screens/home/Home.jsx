@@ -3,8 +3,11 @@ import styles from './style';
 import Tile from "./components/tile/Tile";
 import Mlink from "../../reuse/components/layout/mlink/MLink";
 import routerNames from '/imports/ui/navigation/RauterNames';
+import BubbleChart from '/imports/ui/charts/BubbleChart';
+
 
 const Home = props => {
+
     return (
         <div style={styles.container}>
             <div style={styles.session}>
@@ -18,6 +21,9 @@ const Home = props => {
                    <Tile text={"+ Ver minhas tarefas"} />
                 </Mlink>
             </div>
+
+            <BubbleChart
+            />
 
         </div>
     );

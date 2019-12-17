@@ -13,10 +13,13 @@
     "@material-ui/core": "^4.7.2",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/pickers": "^3.2.8",
+    "chart.js": "^2.9.3",
     "date-fns": "^2.8.1",
     "history": "^4.10.1",
+    "html2canvas": "^1.0.0-rc.5",
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.9.0",
+    "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.9.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2"
