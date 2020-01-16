@@ -99,6 +99,7 @@ class BubbleChart extends Component {
                     title={'Gerar PDF com imagem'}
                     onClick={this.teste}
                 />
+
                 <TDButton
                     type={'primary'}
                     title={'Teste 2'}
