@@ -72,14 +72,16 @@ class BubbleChart extends Component {
     }}
     render() {
         return (
-            <div id="bubid" className="divToPDF">
+            <div id="bubid" >
                 <h2>Doughnut Example</h2>
-                <Doughnut
-                    id="dugid"
-                    data={data}
 
-                />
+                <div  style={{position: 'absolute',opacity: '0.0'}}>
+                    <Doughnut
+                        id="dugid"
+                        data={data}
 
+                    />
+                </div>
 
                 <TDButton
                     type={'primary'}
